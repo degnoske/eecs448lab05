@@ -13,27 +13,27 @@ $query = "SELECT post_id, content, author_id FROM Posts";
 
 <form action="DeletePost.php" onsubmit="return validation(this)" method="GET">
 
+    <p>Select Posts you wish to delete:</p>
 
 
 
+    <?php
 
-        <?php
-        echo "<table>";
-        if ($result = $db->mysqli->query($query)) {
+       echo '<table>';
+    if ($result = $db->mysqli->query($query)) {
+    while ($row = $result->fetch_assoc()) {
+    $post_id= $row['post_id'];
+    $author_id=$row['author_id'];
+    $content=$row['content'];
 
-    $array1 = $result->fetch_all();
+    echo '<tr><td>'.$postID.'</td><td>'.$author.'</td><td>'.$content.'</td>';
+    echo '<td><input type = "checkbox" name="isChecked[]"></td></tr>';
+    }}
 
-        }
-    foreach($array1 as $entry)
-    {
-    echo "<tr style=\"border:1px solid gray\" bgcolor=\"gray\"><td>" . $entry[0] . "</td><td><b></td></tr>";
-    }
+    echo '</table>'
+    ?>
 
 
-        $db->close();
-        ?>
-
-    </select>
 
     <button type="submit" value="Submit">Submit</button>
 
