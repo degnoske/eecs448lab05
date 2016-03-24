@@ -1,0 +1,42 @@
+<?php
+    require('db.php');
+
+    $db = new db();
+    $db->connect();
+
+$query = "SELECT post_id, content, author_id FROM Posts";
+
+?>
+
+<html>
+<body>
+
+<form action="DeletePost.php" onsubmit="return validation(this)" method="GET">
+
+
+
+
+
+        <?php
+        echo "<table>";
+        if ($result = $db->mysqli->query($query)) {
+
+    $array1 = $result->fetch_all();
+
+        }
+    foreach($array1 as $entry)
+    {
+    echo "<tr style=\"border:1px solid gray\" bgcolor=\"gray\"><td>" . $entry[0] . "</td><td><b></td></tr>";
+    }
+
+
+        $db->close();
+        ?>
+
+    </select>
+
+    <button type="submit" value="Submit">Submit</button>
+
+</form>
+</body>
+</html>

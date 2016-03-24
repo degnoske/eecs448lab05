@@ -1,0 +1,37 @@
+<?php
+    require('db.php');
+
+    $db = new db();
+    $db->connect();
+
+    $query = "SELECT * FROM  `Persons` LIMIT 0 , 30";
+
+?>
+
+<html>
+<body>
+
+<form action="ViewUserPosts.php" onsubmit="return validation(this)" method="GET">
+
+    <p>Select user:</p>
+
+    <select id="user" name="user">
+
+    <?php
+        if ($result = $db->mysqli->query($query)) {
+            while ($row = $result->fetch_assoc()) {
+                $userID = $row['user_id'];
+                echo "<option value='$userID' name='$userID'>" . $row['user_id'] . "</option>";
+            }
+        }
+
+        $db->close();
+    ?>
+
+    </select>
+
+    <button type="submit" value="Submit">Submit</button>
+
+</form>
+</body>
+</html>
